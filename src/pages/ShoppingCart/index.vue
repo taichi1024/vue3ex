@@ -1,26 +1,26 @@
 <script setup lang="ts">
-import { reactive, ref } from 'vue';
+import { reactive, computed } from 'vue';
 
 type ShoppingCart = {
   name: string,
   num: number,
   price: number,
 }
-let shoppingCarts = reactive<ShoppingCart[]>([
+const shoppingCarts = reactive<ShoppingCart[]>([
     {
       name: '电脑',
       num: 1,
-      price: 10000.88,
+      price: 10000,
     },
     {
       name: '鼠标',
       num: 2,
-      price: 10.52,
+      price: 10,
     },
     {
       name: '键盘',
       num: 3,
-      price: 40.99,
+      price: 40,
     },
   ]
 )
@@ -28,26 +28,21 @@ let shoppingCarts = reactive<ShoppingCart[]>([
 const computePrice = (item: ShoppingCart, flag: number) => {
   if (flag === 1) {
     item.num++
-    computeTotal()
   }
   if (flag === 2 && item.num > 1) {
     item.num--
-    computeTotal()
   }
 }
 
 const del = (index: number) => {
   shoppingCarts.splice(index, 1)
-  computeTotal()
 }
 
-let total = ref(0)
-const computeTotal = () => {
-  total.value = shoppingCarts.reduce((prev, next) => {
+const total = computed<number>(() => {
+  return shoppingCarts.reduce((prev, next) => {
     return prev + (next.num * next.price)
-  }, 0) 
-}
-computeTotal()
+  }, 0)
+})
 </script>
 
 <template>
@@ -81,7 +76,7 @@ computeTotal()
 </template>
 
 <style scoped>
-table,tr,th,td {
+table, tr, th, td {
   border: 1px solid #ccc;
   border-collapse: collapse;
 }
