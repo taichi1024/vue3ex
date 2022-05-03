@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { reactive, computed } from 'vue';
+import { reactive, computed } from '@vue/reactivity'
 
 type ShoppingCart = {
   name: string,
@@ -69,7 +69,7 @@ const total = computed<number>(() => {
     </tbody>
     <tfoot>
       <tr>
-        <td colspan="3">合计：{{ total }}</td>
+        <td colspan="4">合计：{{ total }}</td>
       </tr>
     </tfoot>
   </table>
